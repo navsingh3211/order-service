@@ -21,7 +21,7 @@ public class CartController {
     public ResponseEntity<String> addToCart(
             @RequestHeader("X-User-ID") String userId,
             @RequestBody CartItemRequest request){
-        if(!cartService.addToCart(userId,request)){
+        if(!cartService.addToCart(Long.valueOf(userId),request)){
             return ResponseEntity.badRequest().body("Product out of stock or user not found or product not found!!");
         }
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -31,13 +31,13 @@ public class CartController {
     public ResponseEntity<Void> removeFromCart(
             @RequestHeader("X-User-ID") String userId,
             @PathVariable Long productId){
-        boolean idDeleted = cartService.deleteItemFromCart(userId,productId);
+        boolean idDeleted = cartService.deleteItemFromCart(Long.valueOf(userId),productId);
         return idDeleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
     @GetMapping
     public ResponseEntity<List<CartItem>> getCart(
             @RequestHeader("X-User-ID") String userId){
-        return ResponseEntity.ok(cartService.getUserCart(userId));
+        return ResponseEntity.ok(cartService.getUserCart(Long.valueOf(userId)));
     }
 }
