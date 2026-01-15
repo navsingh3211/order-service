@@ -3,6 +3,18 @@ spring:
     name: order-service
   config:
     import: optional:configserver:http://localhost:8889
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,refresh,busrefresh
+
 #  h2:
 #    console:
 #      enabled: true
