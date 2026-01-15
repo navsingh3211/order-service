@@ -1,6 +1,8 @@
 spring:
   application:
     name: order-service
+  config:
+    import: optional:configserver:http://localhost:8889
 #  h2:
 #    console:
 #      enabled: true
@@ -10,20 +12,20 @@ spring:
 #    url: jdbc:postgresql://localhost:5432/orderdb
 #    username: postgres
 #    password: admin
-  datasource:
-    url: jdbc:mysql://localhost:3306/orderdb
-    username: navsingh3211
-    password: yourpassword
-
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.MySQLDialect
-    properties:
-      hibernate:
-        format_sql: true
-
-
-server:
-  port: 8080
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/orderdb
+#    username: navsingh3211
+#    password: yourpassword
+#
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#    database-platform: org.hibernate.dialect.MySQLDialect
+#    properties:
+#      hibernate:
+#        format_sql: true
+#
+#
+#server:
+#  port: 8080
