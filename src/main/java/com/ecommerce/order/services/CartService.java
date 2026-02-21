@@ -16,7 +16,7 @@ import java.util.Optional;
 @Transactional
 public class CartService {
     private final CartItemRepository cartItemRepository;
-
+    private final ProductProviderWebClient productProviderWebClient;
     public boolean addToCart(Long userId, CartItemRequest request) {
 //        Optional<Product> productOpt = productRepository.findById(request.getProductId());
 //        if(productOpt.isEmpty())
@@ -28,6 +28,14 @@ public class CartService {
 //        if(userOpt.isEmpty())
 //            return false;
 //        User user = userOpt.get();
+
+        //Validating product by id using webclient from product microservice
+        System.out.println(productProviderWebClient.getProductById(request.getProductId()).block()+" myresponse");
+        boolean isProductExist = Boolean.TRUE.equals(productProviderWebClient.getProductById(request.getProductId()).block());
+        if(!isProductExist){
+            return false;
+        }
+        //--end
 
         CartItem existingCartItem = cartItemRepository.findByUserIdAndProductId(userId,request.getProductId());
         if(existingCartItem!=null){
