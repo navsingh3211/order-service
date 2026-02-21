@@ -1,0 +1,45 @@
+package com.ecommerce.order.httpInterfaceClientconfig;
+
+import com.ecommerce.order.services.ProductProviderWebClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.support.WebClientAdapter;
+import org.springframework.web.service.invoker.HttpServiceProxyFactory;
+import reactor.core.publisher.Mono;
+
+import java.util.Optional;
+
+@Configuration
+public class ProductHttpInterfaceClientConfig {
+    @Bean
+    @LoadBalanced
+    public WebClient.Builder webClientLoadbalancer(){
+        return WebClient.builder();
+    }
+
+    @Bean
+    public ProductProviderWebClient webClientHttpInterface(WebClient.Builder webClinetBuilder){
+        WebClient webClient = webClinetBuilder.baseUrl("http://product-service")
+                .defaultStatusHandler(HttpStatusCode::is4xxClientError,response -> Mono.empty() )
+                .build();
+
+        WebClientAdapter adapter = WebClientAdapter.create(webClient);
+        HttpServiceProxyFactory factory = HttpServiceProxyFactory
+                .builderFor(adapter).build();
+
+        ProductProviderWebClient service = factory.createClient(ProductProviderWebClient.class);
+        return service;
+    }
+//    @Bean
+//    @LoadBalanced
+//    public WebClient.Builder loadBalancedWebClient(){
+//        return WebClient.builder();
+//    }
+//    @Bean
+//    public WebClient webClient(WebClient.Builder builder){
+//        return builder.baseUrl("http://product-service").build();
+//    }
+}
