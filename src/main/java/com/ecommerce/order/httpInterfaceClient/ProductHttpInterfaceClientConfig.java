@@ -12,16 +12,10 @@ import reactor.core.publisher.Mono;
 
 @Configuration
 public class ProductHttpInterfaceClientConfig {
-    @Bean
-    @LoadBalanced
-    @Primary
-    public WebClient.Builder webClientLoadbalancer(){
-        return WebClient.builder();
-    }
 
     @Bean
-    public ProductProviderWebClient webClientHttpInterface(WebClient.Builder webClinetBuilder){
-        WebClient webClient = webClinetBuilder.baseUrl("http://product-service")
+    public ProductProviderWebClient webClientHttpInterface(WebClient.Builder webClientBuilder){
+        WebClient webClient = webClientBuilder.baseUrl("http://product-service")
                 .defaultStatusHandler(HttpStatusCode::is4xxClientError,response -> Mono.empty() )
                 .build();
 

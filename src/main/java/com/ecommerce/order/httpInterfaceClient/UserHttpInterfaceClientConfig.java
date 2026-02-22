@@ -13,12 +13,6 @@ import reactor.core.publisher.Mono;
 public class UserHttpInterfaceClientConfig {
 
     @Bean
-    @LoadBalanced
-    public WebClient.Builder webClientLoadBalancer(){
-        return WebClient.builder();
-    }
-
-    @Bean
     public UserProviderWebClient webClientHttpUserInterface(WebClient.Builder webClientBuilder){
         WebClient webClient = webClientBuilder.baseUrl("http://userservice")
                 .defaultStatusHandler(HttpStatusCode::is4xxClientError, response -> Mono.empty() )
