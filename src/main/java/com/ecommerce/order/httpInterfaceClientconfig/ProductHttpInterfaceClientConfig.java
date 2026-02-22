@@ -4,6 +4,7 @@ import com.ecommerce.order.services.ProductProviderWebClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class ProductHttpInterfaceClientConfig {
     @Bean
     @LoadBalanced
+    @Primary
     public WebClient.Builder webClientLoadbalancer(){
         return WebClient.builder();
     }
