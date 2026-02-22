@@ -3,6 +3,8 @@ package com.ecommerce.order.services;
 import com.ecommerce.order.dto.CartItemRequest;
 import com.ecommerce.order.dto.ProductResponse;
 import com.ecommerce.order.dto.UserResponse;
+import com.ecommerce.order.httpInterfaceClient.ProductProviderWebClient;
+import com.ecommerce.order.httpInterfaceClient.UserProviderWebClient;
 import com.ecommerce.order.models.CartItem;
 import com.ecommerce.order.repository.CartItemRepository;
 import jakarta.transaction.Transactional;
@@ -11,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

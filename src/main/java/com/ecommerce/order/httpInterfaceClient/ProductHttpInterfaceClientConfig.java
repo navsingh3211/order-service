@@ -1,6 +1,5 @@
-package com.ecommerce.order.httpInterfaceClientconfig;
+package com.ecommerce.order.httpInterfaceClient;
 
-import com.ecommerce.order.services.ProductProviderWebClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +9,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 import reactor.core.publisher.Mono;
-
-import java.util.Optional;
 
 @Configuration
 public class ProductHttpInterfaceClientConfig {

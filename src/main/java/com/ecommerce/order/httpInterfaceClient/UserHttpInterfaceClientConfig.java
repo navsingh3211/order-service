@@ -1,6 +1,5 @@
-package com.ecommerce.order.httpInterfaceClientconfig;
+package com.ecommerce.order.httpInterfaceClient;
 
-import com.ecommerce.order.services.UserProviderWebClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

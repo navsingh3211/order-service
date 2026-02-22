@@ -1,4 +1,4 @@
-package com.ecommerce.order.services;
+package com.ecommerce.order.httpInterfaceClient;
 
 import com.ecommerce.order.dto.UserResponse;
 import org.springframework.web.bind.annotation.PathVariable;
