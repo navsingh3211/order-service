@@ -20,7 +20,17 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,refresh,busrefresh
+        include: "*"
+#        include: health,info,refresh,busrefresh
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
 
 #  h2:
 #    console:
@@ -48,3 +58,25 @@ management:
 #
 #server:
 #  port: 8080
+
+#Circuit Breaker
+resilience4j:
+  circuitbreaker:
+    instances:
+      productService:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        slidingWindowType: count_based
+
+#1. Calls happen → monitored (last 10 req)
+#2. If ≥50% fail → OPEN state
+#3. Block calls for 10 seconds
+#4. Allow 3 test calls (HALF-OPEN)
+#5. If success → CLOSE
+#6. If fail → OPEN again
+
