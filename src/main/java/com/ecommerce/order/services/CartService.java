@@ -68,6 +68,7 @@ public class CartService {
     }
     public boolean addToCartFallBack(String userId, CartItemRequest request, Exception exception){
         System.out.println("Fallback called");
+        exception.printStackTrace();
         return false;
     }
 
