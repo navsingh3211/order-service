@@ -32,6 +32,15 @@ management:
     sampling:
       probability: 1.0
 
+rabbitmq:
+  exchange:
+    name: order.exchange
+  queue:
+    name: order.queue
+  routing:
+    key: order.tracking
+
+
 #  h2:
 #    console:
 #      enabled: true
